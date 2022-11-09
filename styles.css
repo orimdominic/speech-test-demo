@@ -1,0 +1,24 @@
+  * {
+    font-family: Verdana, Arial, sans-serif;
+  }
+
+  .instructions {
+    max-width: 70%;
+    line-height: 1.5em;
+  }
+
+  .button {
+    padding: 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    border: 0;
+  }
+
+  #record_btn_container {
+    display: none;
+  }
+
+  #btn_record {
+    background-color: #398b39;
+    color: white
+  }

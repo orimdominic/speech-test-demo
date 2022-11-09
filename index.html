@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Speech Test Demo</title>
+  <link rel="stylesheet" type="text/css" href="./styles.css">
+</head>
+
+<body>
+
+  <h1>Speech Test Demo</h1>
+
+  <h2>Instructions</h2>
+  <div class="instructions">
+    <ul>
+      <li>Please take this test in a quiet environment</li>
+      <li>Please take this test using the Google Chrome browser on your computer</li>
+      <li>Make sure you have a stable internet connection</li>
+      <li>Allow/Enable the microphone when asked</li>
+      <li>You will be given a <b>3 phrases</b> to record with your speech. When the sentence appears, click on the
+        "Start recording" button and
+        speak and click on the "Stop recording" button when you are done.</li>
+      <li>
+        At the end of the test, your score will be revealed to you and you will know if you can speak English well or
+        not 😈
+      </li>
+      <li>Click the START button to begin</li>
+    </ul>
+  </div>
+
+  <div>
+    <button id="btn_start_test" class="button" onclick="startTest()">START</button>
+  </div>
+
+  <p id="p_current_phrase"></p>
+
+  <div  id="record_btn_container">
+    <button id="btn_record" class="button" onclick="record(event)">
+      Start recording
+    </button>
+  </div>
+  <!-- <div id="info">
+    <p id="info_start">Click on the microphone icon and begin speaking.</p>
+    <p id="info_speak_now">Speak now.</p>
+    <p id="info_no_speech">No speech was detected. You may need to adjust your
+      <a href="//support.google.com/chrome/bin/answer.py?hl=en&amp;answer=1407892">
+        microphone settings</a>.
+    </p>
+    <p id="info_no_microphone" style="display:none">
+      No microphone was found. Ensure that a microphone is installed and that
+      <a href="//support.google.com/chrome/bin/answer.py?hl=en&amp;answer=1407892">
+        microphone settings</a> are configured correctly.
+    </p>
+    <p id="info_allow">Click the "Allow" button above to enable your microphone.</p>
+    <p id="info_denied">Permission to use microphone was denied.</p>
+    <p id="info_blocked">Permission to use microphone is blocked. To change,
+      go to chrome://settings/contentExceptions#media-stream</p>
+    <p id="info_upgrade">Web Speech API is not supported by this browser.
+      Upgrade to <a href="//www.google.com/chrome">Chrome</a>
+      version 25 or later.
+    </p>
+  </div>
+  <div class="right">
+    <button id="start_button" onclick="startButton(event)">
+      <img id="start_img" src="mic.gif" alt="Start">
+    </button>
+  </div>
+  <div id="results">
+    <span id="final_span" class="final"></span>
+    <span id="interim_span" class="interim"></span>
+  </div>
+  <div class="center">
+    <div class="sidebyside" style="text-align:right">
+      <button id="copy_button" class="button" onclick="copyButton()">
+        Copy and Paste</button>
+      <div id="copy_info" class="info">
+        Press Control-C to copy text.<br>(Command-C on Mac.)
+      </div>
+    </div>
+  </div> -->
+  <script type="text/javascript" src="./script.js"></script>
+</body>
+
+</html>
