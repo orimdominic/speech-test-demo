@@ -67,7 +67,7 @@ if (!("webkitSpeechRecognition" in window)) {
       scores.push(0);
       return;
     }
-    const score = new Intl.Collator("en").compare(
+    const score = similarity(
       phrases[currentPhraseIndex - 1]
         .toLowerCase()
         .replace(/[^\w\s\']|_/g, "")
@@ -77,13 +77,13 @@ if (!("webkitSpeechRecognition" in window)) {
         .replace(/[^\w\s\']|_/g, "")
         .replace(/\s+/g, " ")
     );
-    scores.push(score === 0 ? 1 : 0);
+    scores.push(score);
     // avgScore = (scores.reduce((acc, score) => acc + score) / 3) * 100;
     // console.log({
     //   final_transcript,
     //   score,
     //   scores,
-    //   average: avgScore,
+    //   average: (scores.reduce((acc, score) => acc + score) / 3) * 100,
     // });
     if (currentPhraseIndex >= phrases.length) {
       btn_record.style.display = "none";
@@ -247,13 +247,14 @@ function showButtons(style) {
 }
 
 function startTest() {
-  navigator.mediaDevices.getUserMedia({ audio: true })
-      .then(function(stream) {
-        console.log('You let me use your mic!')
-      })
-      .catch(function(err) {
-        console.log('No mic for you!')
-      });
+  navigator.mediaDevices
+    .getUserMedia({ audio: true })
+    .then(function (stream) {
+      console.log("You let me use your mic!");
+    })
+    .catch(function (err) {
+      console.log("No mic for you!");
+    });
   if (currentPhraseIndex >= phrases.length) {
     return;
   }
@@ -261,4 +262,44 @@ function startTest() {
     phrases[currentPhraseIndex]
   }`;
   record_btn_container.style.display = "block";
+}
+/** See https://stackoverflow.com/a/36566052 */
+function similarity(s1, s2) {
+  var longer = s1;
+  var shorter = s2;
+  if (s1.length < s2.length) {
+    longer = s2;
+    shorter = s1;
+  }
+  var longerLength = longer.length;
+  if (longerLength == 0) {
+    return 1.0;
+  }
+  return (
+    (longerLength - editDistance(longer, shorter)) / parseFloat(longerLength)
+  );
+}
+
+function editDistance(s1, s2) {
+  s1 = s1.toLowerCase();
+  s2 = s2.toLowerCase();
+
+  var costs = new Array();
+  for (var i = 0; i <= s1.length; i++) {
+    var lastValue = i;
+    for (var j = 0; j <= s2.length; j++) {
+      if (i == 0) costs[j] = j;
+      else {
+        if (j > 0) {
+          var newValue = costs[j - 1];
+          if (s1.charAt(i - 1) != s2.charAt(j - 1))
+            newValue = Math.min(Math.min(newValue, lastValue), costs[j]) + 1;
+          costs[j - 1] = lastValue;
+          lastValue = newValue;
+        }
+      }
+    }
+    if (i > 0) costs[s2.length] = lastValue;
+  }
+  return costs[s2.length];
 }
